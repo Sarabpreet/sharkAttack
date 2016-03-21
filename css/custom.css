@@ -126,6 +126,11 @@ input.reason {
   height: 500px;
   margin: 0 auto;
   animation: move 10s ease-in-out infinite;
+  -webkit-transform: scale(0.6);
+  -moz-transform: scale(0.6);
+  -ms-transform: scale(0.6);
+  -o-transform: scale(0.6);
+  transform: scale(0.6);
 }
 .three .game .circle {
   width: 300px;
@@ -204,7 +209,6 @@ input.reason {
 @keyframes move {
   50% {
     top: 10%;
-    transform: rotate(2deg) scale(1.001);
   }
 }
 .one {

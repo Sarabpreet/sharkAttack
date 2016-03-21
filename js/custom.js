@@ -5,6 +5,7 @@ var counter = 0;
 var resp={};
 var name='John Doe';
 var fbimg;
+var reason;
 function playAgain(){
 
  count=0;
@@ -206,7 +207,7 @@ function makeImage(){
 
 var canvas = document.getElementById("img");
 var ctx = canvas.getContext("2d");
-var reason=$('.reason').val();
+ reason=$('.reason').val();
 canvas.width=1000;//horizontal resolution (?) - increase for better looking text
 canvas.height=500;//vertical resolution (?) - increase for better looking text
 ctx.font = "32px Aller";
@@ -232,12 +233,12 @@ img3.onload=function(){
 
 	      imageObj.onload = function() {
         // ctx.drawImage(imageObj,10,60);
-  	   //   ctx.drawImage(img3,250,120,200, 200*imageObj.height/imageObj.width);
- 	  //   ctx.drawImage(imageObj,550,120,200, 200*imageObj.height/imageObj.width);/
+  	     ctx.drawImage(img3,250,140,200, 200*imageObj.height/imageObj.width);
+ 	    ctx.drawImage(imageObj,550,140,200, 200*imageObj.height/imageObj.width);
 
       };
    	  imageObj.src=url;
-      img2.src="img/dirt.png";
+      // img2.src="img/dirt.png";
       img2.crossOrigin = 'anonymous';
       img2.onload=function(){
 	
@@ -248,7 +249,7 @@ img3.onload=function(){
 }
       // imageObj.src = 'https://academics.vit.ac.in/student/view_photo_2.asp?rgno=14MCA0009';
 
-    img3.src=fbimg;
+     img3.src=fbimg;
      img3.crossOrigin = 'anonymous';
     	
 
@@ -337,10 +338,11 @@ console.log("update has been called : ");
     var ref = new Firebase("https://shark-attack-vit.firebaseio.com/score");
     ref.push({
     score:count,
-    name:"sarabpreet"
+    name:name,
+    reason:reason,
+    time:Firebase.ServerValue.TIMESTAMP,
       
     });
-
 
 
 }
