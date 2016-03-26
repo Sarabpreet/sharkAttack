@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+
+    <title>Shark Attack : Vit Version</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+        <link href="css/ani.css" rel="stylesheet">
+           <link href="css/custom.css" rel="stylesheet">
+
+  </head>
+  <body>
+
+<div class="that"></div>
+
+
+    <div class="blockw">
+      <div class="container">
+<div class="row">
+  <div class="col-lg-3">  <a href="" class="topScore">Real Time Scores</a>
+</div>
+<div class="col-lg-3">  <a href="" class="comment">Comments</a>
+</div>
+<div class="col-lg-3">  <a href="" class="how">How to Play</a>
+</div>
+<div class="col-lg-3">  <a href="" class="contribute">Contribute</a>
+</div>
+</div>
+</div>
+    </div> 
+
+
+    <!-- login frame                 -->
+<div class="login frame one">
+
+<div class="logo"></div>
+<a href="" class="playnow"> Play Now</a>
+
+<!--     <div class="container">
+<div class="row">
+    <h2>Real time list of top scorers</h2>
+<div class="col-md-5">Player</div>   
+<div class="col-md-4">Victim</div>
+<div class="col-md-3">Score</div>
+</div>
+
+
+    </div>
+ -->
+
+
+</div>
+
+<!-- enter the roll number you'd like to hit -->
+<div class="victim frame two">
+    
+
+<h2>Hi <span class="name"></span>, please enter vitim's id</h2>
+<div class="block">
+    <h3>Who'd you like to smash?</h3>
+<form action="" id="input-thing">
+    
+    <input type="text" class="input-id" placeholder="Enter Victim's ID Eg, 14MCA0009" pattern="^(10|11|12|13|14|15|16)\w\w\w\d\d\d\d" maxlength="9" title="Please enter a valid id, in proper format (eg, 14MCA0009)">
+<input type="text" class="reason" placeholder="Reason? (not more then 30 characters) eg (for being very cute…)" maxlength="40"> 
+<p>Click <span class="click">here</span> if you are not a Vitian (this will make you hit random vitian's)</p>
+<input type="submit" value="Go">
+
+</form>
+
+
+</div>
+</div>
+
+<!-- main canvas -->
+
+
+<div class=" game-canvas frame three">
+
+<div class="meta"><div class="left">Time Left: <span class="time"></span></div>
+
+<div class="right">Score: <span class="score">00</span></div>
+</div>
+<div class="game">
+    
+    <div class="shot"></div>
+    <div class="circle"></div>
+
+</div>
+
+</div>
+
+<!-- canvas ends here -->
+
+
+
+
+<div class=" replay frame four">
+    
+
+
+<h2><span class="name">fb:Sarabpreet</span>, your score is <span class="score"></span> in about a minute!</h2>
+
+<div class="fb-pic">
+    
+
+
+
+<canvas id="img" class="animated fadeInDown"></canvas>
+<p>You could save the above pic by right clicking the image! :) #PicSwag!</p>
+
+
+</div>
+<div class="container-fluid"> <div class="row">
+    
+  <div class="col-sm-4 col-sm-offset-4 those">
+        
+        <div class="col-sm-4">
+
+        <!-- <a href="" thing="share"> -->
+        <a href='' thing="share">
+
+
+        <span class="glyphicon glyphicon-share"></span> Share</a></div>
+
+
+    <div class="col-sm-4"><a href="" thing="replay"><span class="glyphicon glyphicon-repeat"></span> Try Again</a></div>
+    <div class="col-sm-4">  <a href="" thing="modal"><span class="glyphicon glyphicon-flag"></span> Top Scores</a></div>
+    
+<!--     <a    ></a> -->
+
+
+
+  </div>
+</div>
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div id="wrap">
+
+<div class="shot"></div>
+
+
+<div class="plus"></div>
+    <div class="canvas animated jello infinite">
+    
+</div>
+
+
+</div> -->
+
+
+ <!-- Buttons -->
+
+ <!-- Modal -->
+  <div class="modal fade" id="topScore" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 style="color:blue;"><span class="glyphicon glyphicon-flag"></span> Top Scorers</h4>
+        </div>
+        <div class="modal-body">
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Date &amp; Time</th>
+        <th>Name</th>
+        <th>Score</th>
+               <th>Victim</th>
+        <th>Reason</th>
+      </tr>
+    </thead>
+    <tbody class="insert-data-here">
+     
+    </tbody>
+  </table>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="modal fade" id="comments" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 style="color:orange;"><span class="glyphicon glyphicon-comment"></span> Add a comment</h4>
+        </div>
+        <div class="modal-body">
+
+
+<div id="disqus_thread"></div>
+<script>
+    /**
+     *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+     *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+     */
+    /*
+    var disqus_config = function () {
+        this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    */
+    (function() {  // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        
+        s.src = '//sharkattackvit.disqus.com/embed.js';
+        
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="how" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 style="color:green;"><span class="  glyphicon glyphicon-question-sign"></span> How to play</h4>
+        </div>
+        <div class="modal-body">
+<h5>How to play : The Right way!</h5>
+
+<p>It's simple, hit space bar(biggest button in keyboard) when victim(you're so called VITian friend) is near shark's mouth, the shark will suck the victim if done properly! <br>Tip: you could hold it for exactly .6 seconds to boost your score.  <br>IMPORTANT: there is a negetive -1 for wrong timing, and goes the same with boost mode ie, mass gain has chances of mass loss.</p>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal fade" id="contribute" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 style="color:red;"><span class="glyphicon glyphicon-heart"></span> Contribute</h4>
+        </div>
+        <div class="modal-body">
+
+
+<h5>Willing to contribute?</h5>
+<p>There's alot of leaks and bugs in the project, i would love to have some support! if you are a designer or developer who's willing to contribute are most welcome! :) <br>tweet me@: Saarabpreet</p>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+<!-- live reload script would go here, please remove if this is in production. -->
+
+
+<!-- liveReload script ends here -->
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <script src="js/m.js"></script>
+      <script src="https://cdn.firebase.com/js/client/2.4.1/firebase.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="js/bootstrap.js"></script>
+    <script>
+
+
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '391751470929648',
+      xfbml      : true,
+      version    : 'v2.5'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+
+
+    <script src="js/custom.js"></script>
+
+
+  
+  </body>
+</html>
+
+
