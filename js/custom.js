@@ -5,7 +5,8 @@ var counter = 0;
 var resp={};
 var name='John Doe';
 var fbimg;
-var reason;
+var reason='';
+
 function playAgain(){
 
  count=0;
@@ -19,7 +20,7 @@ $('.two').addClass('animated fadeInDown').show();
 $('.score').text(count);
 $('.inputId').val('');
 $('.reason').val('');
-   $('.blockw').show();
+ $('.blockw').show();
 
 }
 
@@ -27,7 +28,7 @@ function check(){
 var width=$('.circle').width();
 if(($(".shot").offset().left>=$('.circle').offset().left) && ($(".shot").offset().left<=$(".circle").offset().left+width)) {
 
-			console.log("yayy");
+			// console.log("yayy");
 			$('.shot').removeClass('play');
 			$('.shot').addClass('up');
 			add();
@@ -39,7 +40,7 @@ if(($(".shot").offset().left>=$('.circle').offset().left) && ($(".shot").offset(
 }
 else {
 
-	console.log("boooo...");
+	// console.log("boooo...");
 	remove();
 
 }
@@ -65,7 +66,7 @@ function listen(){
 
 function unlisten(){
 
-$(window).unbind("keyup");
+$(window).unbind("keypress");
 
 
 //  $(window).keypress(function (e) {
@@ -97,9 +98,9 @@ FB.login(function(response) {
 	$('.two').show().addClass("animated fadeInDown"); 
 
 
-FB.api('/me', function(response) {
+FB.api('/me?fields=first_name', function(response) {
     // console.log(JSON.stringify());
-    name=response.name;
+    name=response.first_name;
     resp=response;
     $('.name').text(name);
 });
@@ -131,9 +132,7 @@ FB.api('/me','GET',{"fields":"picture.width(200).height(200)"},
 });
 $( "#input-thing" ).submit(function( event ) {
 $('#input-thing').removeClass("animated shake");
-
  event.preventDefault();
-
 
 if($('.input-id').val()=='' || $('.reason').val()=='') {
 
@@ -147,14 +146,22 @@ else {
  $('.three').show().addClass("animated fadeInDown"); 
  trigger();
 }
+});
 
 
+
+$('.click').on('click',function(){
+
+ $('.two').hide();
+ $('.blockw').hide();
+ $('.three').show().addClass("animated fadeInDown"); 
+ $('.input-id').val('14MCA0009');
+ $('.reason').val('On Random Hunt Streak!');
+ trigger();
 
 
 
 });
-
-
 
 function add(){
 
@@ -181,6 +188,7 @@ var interval = setInterval(function() {
         $('.four').show().addClass('animated fadeInDown');
         unlisten();
         makeImage();
+        publishScore();
     }
 }, 500);
 
@@ -188,11 +196,35 @@ var interval = setInterval(function() {
 }
 
 
+var countD=1;
+function countDown(){
+var intervalC = setInterval(function() {
+    $('.that').text(countD);
+   countD++;
+   console.log(countD);
+    if (countD>=5) {
+        // Display a login box
+        clearInterval(intervalC);
+       $('.that').hide();
+       console.log(countD);
+    }
+}, 800);
+
+
+}
+
+
 function trigger(){
+        $('.that').show();
+        countDown();
+
 	      setTimeout(function(){ 
 				$('.shot').addClass('play');
 				timer();
-				listen();}, 3000);
+				listen();}, 5000);
+
+
+
 				inputId=$('.input-id').val();
 				url='https://academics.vit.ac.in/student/view_photo_2.asp?rgno='+inputId;
 				$('.shot').css('background-image', 'url(' + url + ')','background-color','white');
@@ -203,6 +235,7 @@ function trigger(){
 // var img='https://academics.vit.ac.in/student/view_photo_2.asp?rgno=14MCA0020';
 
 // img.onload=makeImage();
+var stringresult="",stringresultbig="";
 function makeImage(){
 
 var canvas = document.getElementById("img");
@@ -215,7 +248,9 @@ ctx.textAlign="center";
 ctx.fillStyle="#FFffff";
 ctx.fillRect(0,0,canvas.width,canvas.height);
 ctx.fillStyle="#999999";
-ctx.fillText(inputId+", got killed "+count+" times by "+name,500,60);
+stringresult=inputId+", got killed "+count+" times by "+name;
+stringresultbig=stringresult+" Because '"+reason+"'";
+ctx.fillText(stringresult,500,60);
 ctx.font = "25px Aller";
 ctx.fillText("Reason: "+reason,500,100);
 
@@ -265,13 +300,13 @@ img3.onload=function(){
 
 $('a').on("click",function(e){
 
-
-
-if($(this).attr('thing')!='share') {
-
  e.preventDefault();
 
-}
+// if($(this).attr('thing')!='share') {
+
+
+
+// }
 
 if($(this).hasClass('topScore')) {
 $('#topScore').modal().addClass("animated fadeInDown");
@@ -308,22 +343,24 @@ $('#contribute').modal().addClass("animated fadeInDown");
 
 $('.four .those a').on("click",function(){
 
-console.log($(this).text());
+// console.log($(this).text());
 
 if($(this).attr('thing')=='share'){
 
-console.log("i am share...");
+
+shareOnFacebook();
+// console.log("i am share...");
 }
 if($(this).attr('thing')=='replay'){
 
-console.log("i am play again....");
+// console.log("i am play again....");
 playAgain();
 
 }
  if($(this).attr('thing')=='modal'){
 
-console.log("i am popup");
-$('#myModal').modal().addClass("animated fadeInDown");
+// console.log("i am popup");
+$('#topScore').modal().addClass("animated fadeInDown");
 }
 
 
@@ -333,13 +370,14 @@ $('#myModal').modal().addClass("animated fadeInDown");
 
 function publishScore(){
 
-console.log("update has been called : ");
+// console.log("update has been called : ");
 
-    var ref = new Firebase("https://shark-attack-vit.firebaseio.com/score");
+   
     ref.push({
     score:count,
     name:name,
     reason:reason,
+    victim:inputId,
     time:Firebase.ServerValue.TIMESTAMP,
       
     });
@@ -348,7 +386,14 @@ console.log("update has been called : ");
 }
 
 
+ var ref = new Firebase("https://shark-attack-vit.firebaseio.com/score");
+ref.orderByChild("score").on("child_added", function(snapshot) { 
+var time = moment(snapshot.val().time).format("DD-MM-YYYY h:mm:ss");
+var string="<tr><td>"+time+"</td><td>"+snapshot.val().name+"</td><td>"+snapshot.val().score+"</td><td>"+snapshot.val().victim+"</td><td>"+snapshot.val().reason+"</td></tr>";
 
+  $('.insert-data-here').append(string);
+
+});
 
 
 
@@ -364,6 +409,27 @@ console.log("update has been called : ");
 
 // }
 
+
+
+
+
+// var globalFacebookShareObject = {name:'Shark Attack VIT VERSION'} //will be set when I click on a product, on a picture, on a comment or post, or whatever I want to share on Facebook or when I load the page
+
+function shareOnFacebook(){
+    FB.ui({
+        method: 'feed',
+        name:stringresult,
+        link: "http://sarabpreet.in",
+        caption: 'Shark Attack Vit Version',
+        description:stringresultbig,
+        picture:fbimg
+    }, function(response) {
+        if(response && response.post_id){}
+        else{}
+    });
+}
+
+// <button >Share it!</button>
 
 
 

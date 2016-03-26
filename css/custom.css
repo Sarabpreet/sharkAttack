@@ -245,9 +245,16 @@ input.reason {
   width: 600px;
   height: 350px;
   background: #FFFFFF;
-  margin: 30px auto;
   -webkit-box-shadow: 0 50px 20px -45px #807c6f;
   box-shadow: 0 50px 20px -45px #807c6f;
+}
+.fb-pic {
+  margin: 30px auto;
+}
+.fb-pic p {
+  padding-top: 26px;
+  text-align: center;
+  color: #4a4a4a;
 }
 .table {
   color: gray;
@@ -291,4 +298,34 @@ input.reason {
 }
 .slide {
   overflow: hidden;
+}
+.modal {
+  color: gray;
+}
+.modal h5 {
+  color: black;
+  text-align: left;
+  font-size: 20px;
+}
+.modal p {
+  text-align: left;
+}
+.that {
+  position: absolute;
+  top: 0px;
+  font-size: 630%;
+  left: 0%;
+  background: rgba(82, 82, 82, 0.15);
+  width: 100%;
+  z-index: 50;
+  height: 100%;
+  padding-top: 10%;
+  display: none;
+}
+.modal-dialog {
+  width: 850px;
+  margin: 30px auto;
+}
+.modal-dialog td {
+  text-align: left;
 }
