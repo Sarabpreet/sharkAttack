@@ -23,7 +23,3 @@ To create an engaging and interactive game using backend profile data, while lev
 
 **Note:**
 This project was developed in the university dorms and may not work currently due to increased security measures by VIT University.
-
----
-
-This entry captures the essence of the SharkAttack project, emphasizing its origins, key features, and current status.
